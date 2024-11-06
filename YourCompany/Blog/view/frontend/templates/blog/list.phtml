@@ -1,0 +1,17 @@
+<?php
+/** @var \YourCompany\Blog\Block\Blog\ListBlog $block */
+$blogs = $block->getBlogPosts();
+?>
+<div class="blog-list">
+    <h1><?= __('Blog Posts') ?></h1>
+    <?php if ($blogs && $blogs->getSize()): ?>
+        <ul>
+            <?php $i = 1; foreach ($blogs as $blog): ?>
+                <li><?= $i++ . '. ' . $block->escapeHtml($blog->getTitle()) ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?= $block->getPaginationHtml() ?>
+    <?php else: ?>
+        <p><?= __('No blog posts found.') ?></p>
+    <?php endif; ?>
+</div>

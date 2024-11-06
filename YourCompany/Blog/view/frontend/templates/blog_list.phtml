@@ -1,0 +1,22 @@
+<?php
+/** @var \YourCompany\Blog\Block\Blog\ListBlog $block */
+$blogPosts = $block->getBlogPosts();
+?>
+
+<div class="blog-list">
+    <h1><?= $block->escapeHtml(__('Blog Posts')) ?></h1>
+    <?php if ($blogPosts && $blogPosts->getSize()): ?>
+        <ul class="blog-post-list">
+            <?php foreach ($blogPosts as $post): ?>
+                <li class="blog-post-item">
+                    <h2><?= $block->escapeHtml($post->getTitle()) ?></h2>
+                    <p><?= $block->escapeHtml($block->truncateDescription($post->getDescription(), 150)) ?></p>
+                    <a href="<?= $block->getPostUrl($post) ?>"><?= $block->escapeHtml(__('Read More')) ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?= $block->getPaginationHtml() ?>
+    <?php else: ?>
+        <p><?= $block->escapeHtml(__('No blog posts found.')) ?></p>
+    <?php endif; ?>
+</div>
